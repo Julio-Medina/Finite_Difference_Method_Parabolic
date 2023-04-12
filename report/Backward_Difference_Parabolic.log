@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.5.18)  11 APR 2023 19:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.5.18)  12 APR 2023 08:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -455,65 +455,22 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 53.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (9.76868pt too wide) detected at line 68
-[]\OML/cmm/m/it/10 x[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 a \OT1/cmr/m/n/10 + \
-OML/cmm/m/it/10 ih;    []i \OT1/cmr/m/n/10 = 0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/1
-0 1\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2\OML/cmm/m/it/10 ; [] ; n [] y \OT1/cmr/
-m/n/10 = \OML/cmm/m/it/10 a \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 jk;    []j \OT1/
-cmr/m/n/10 = 0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 1\OML/cmm/m/it/10 ; \OT1/cmr/m
-/n/10 2\OML/cmm/m/it/10 ; [] ; m
- []
-
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-
-LaTeX Warning: Reference `eq::Poisson' on page 2 undefined on input line 77.
-
-
-LaTeX Warning: Reference `fig::mesh' on page 2 undefined on input line 107.
-
-
-LaTeX Warning: Reference `fig::mesh' on page 2 undefined on input line 107.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 106--108
-
- []
-
-[2]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 134.
- [3]
-LaTeX Font Info:    Trying to load font information for U+bbold on input line 1
-97.
- (/usr/share/texlive/texmf-dist/tex/latex/bbold/Ubbold.fd) [4] [5]
-
-LaTeX Warning: Reference `eq::Poisson' on page 6 undefined on input line 264.
-
-
-Overfull \hbox (3.50417pt too wide) in paragraph at lines 277--277
-[]\OT1/cmr/bx/n/12 Diferencia fi-ni-tas usan-do m^^Seto-do de re-la-ja-mien-to 
-SOR 
- []
-
-
-LaTeX Warning: Reference `eq::Poisson' on page 6 undefined on input line 280.
-
-[6] [7] [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 481--482
+Underfull \hbox (badness 10000) in paragraph at lines 74--75
 []\OT1/cmr/m/n/10 Julio Me-di-na. [].
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 494.
-[10]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 494.
- (./Backward_Difference_Parabolic.aux
-LaTeX Info: Redefining \. on input line 27.
-LaTeX Info: Redefining \% on input line 27.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 87.
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 87.
+
+(./Backward_Difference_Parabolic.aux
+LaTeX Info: Redefining \. on input line 29.
+LaTeX Info: Redefining \% on input line 29.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 494.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 494.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 87.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 87.
 
 
 Package rerunfilecheck Warning: File `Backward_Difference_Parabolic.out' has ch
@@ -523,45 +480,73 @@ anged.
 
 Package rerunfilecheck Info: Checksums for `Backward_Difference_Parabolic.out':
 
-(rerunfilecheck)             Before: FC6D3E9241FFBE8B3DB071E6C72EC002;1351
-(rerunfilecheck)             After:  A1B3B518EF12D5729347772D53D7C44C;1357.
-
-LaTeX Warning: There were undefined references.
-
+(rerunfilecheck)             Before: A1B3B518EF12D5729347772D53D7C44C;1357
+(rerunfilecheck)             After:  AB988056C096D4F02D3A9A48CD70F150;167.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 494.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 87.
  ) 
 Here is how much of TeX's memory you used:
- 8333 strings out of 481239
- 121747 string characters out of 5920377
- 415142 words of memory out of 5000000
- 23378 multiletter control sequences out of 15000+600000
- 538184 words of font info for 47 fonts, out of 8000000 for 9000
+ 8210 strings out of 481239
+ 120027 string characters out of 5920377
+ 402142 words of memory out of 5000000
+ 23302 multiletter control sequences out of 15000+600000
+ 536060 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,9n,35p,581b,381s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texli
-ve/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/public/cm-s
-uper/sfrm1000.pfb>
-Output written on Backward_Difference_Parabolic.pdf (10 pages, 219091 bytes).
+ 34i,5n,35p,442b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{subsubsection.2.6.3} has been referenced but does
+ not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.2.6.2} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.2.6.1} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.2.6} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.2.5} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.2.4} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.2.3} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.2.2} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.2.1.2} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.2.1.1} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.2.1} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{section.2} has been referenced but does not exist, 
+replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.1.2} has been referenced but does not ex
+ist, replaced by a fixed one
+
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmtt10.pfb>
+Output written on Backward_Difference_Parabolic.pdf (1 page, 108671 bytes).
 PDF statistics:
- 252 PDF objects out of 1000 (max. 8388607)
- 220 compressed objects within 3 object streams
- 58 named destinations out of 1000 (max. 500000)
+ 126 PDF objects out of 1000 (max. 8388607)
+ 112 compressed objects within 2 object streams
+ 23 named destinations out of 1000 (max. 500000)
  121 words of extra memory for PDF output out of 10000 (max. 10000000)
 

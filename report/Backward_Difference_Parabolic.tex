@@ -27,7 +27,7 @@
 
 \Large
  \begin{center}
-Método de Diferencias Finitas para ecuaciones elípticas\\
+Método de Diferencias Finitas para ecuaciones parabólicas\\
 
 
 \hspace{10pt}
@@ -48,21 +48,20 @@ Maestría en Física\\
 \hspace{10pt}
 
 \normalsize
-\section{Ecuaciones diferenciales parciales elípticas}
-La ecuación diferencial parcial elíptica a considerar es la ecuación de Poisson
-\begin{equation}\label{eq::Poisson}
-\nabla^2 u(x,y)\equiv \frac{\partial^2 u}{\partial x^2}(x,y) + \frac{\partial^2 u}{\partial y^2}(x,y)=f(x,y)
+\section{Ecuaciones diferenciales parciales parabólicas}
+La ecuación diferencial parcial parabólica o ecuación de calor también conocida como ecuación de difusión
+\begin{equation}\label{eq::parabolic_partial_diff}
+\frac{\partial u}{\partial t}(x,t) = \alpha^2 \frac{\partial^2 u}{\partial x^2}(x,t),\,\,\,\, 0<x<l, \,\,\,\, t>0.
 \end{equation}
-en $R=\{ (x,y)\,\,|\,\, a<x<b ,\, c<y<d \}$, con $u(x,y)=g(x,y) \in S$, donde $S$ denota al contorno de $R$. Si $f$ y $g$ son continuas en su dominio entonces hay una única solución a la ecuación.
-\subsection{Seleccionando un retículo}
+sujeta a las condiciones
+\begin{equation}
+u(0,t)=u(l,t)=0,\,\,\, t>0, \,\,\,\text{y}\,\,\, u(x,0)=f(x)
+\end{equation}
+El acercamiento para resolver la ecuación \ref{eq::parabolic_partial_diff} es el mismo utilizado en \cite{Medina} y \cite{Burden}. Es decir se define un retículo al seleccionar un $m>0$ y definir el paso $h=l/m$, despues escoger un paso temporal $k$, los puntos del reticulo en este caso son $(x_i, t_j)$, donde $x_i=ih$, para $i=0,1,\hdots,m$ y $t_j=jk$ para $j=1,2,\hdots$. 
+\subsection{Método de diferencias atrasadas}
 El método a utilizar es una adaptación bidimensional del método de diferencias finitas para problemas con fronteras lineales como se discute en \cite{Burden}. El primer paso es escoger enteros $n$ y $m$ para definir el tamaño de los pasos(\textit{steps}) $h=(b-a)/n$ y $k=(d-c)/m$ particionando de está manera el intervalo $[a,b]$ en $n$ partes iguales de ancho $h$ y el intervalo $[c,d]$ en $m$ partes iguales con ancho $k$, formando un retículo o cuadricula como se puede ver en la figura
 
-\begin{figure}[h]
-\begin{center}\label{fig::mesh}
-\includegraphics[scale=0.25]{./lattice.png} 
-\end{center} 
-\caption{Cuadrícula de $n\times m$}
-\end{figure}
+
 Este retículo se construye formalmente al dibujar lineas verticales y horizontales sobre el dentro del rectángulo $R$ en los puntos con coordenadas $(x_i, y_j)$, donde
 \begin{equation}
 x_i=a+ih,\,\,\,\text{para cada }i=0,1,2,\hdots,n\, \text{ y }\, y=a+jk,\,\,\,\text{para cada }j=0,1,2,\hdots,m
@@ -478,6 +477,8 @@ Usando las funciones creadas en Python se obtiene la siguiente tabla. Esta tabla
 
 
 \bibitem{Burden} Richard L. Burden, J. Douglas Faires \textit{Numerical Analysis}, (Ninth Edition). Brooks/Cole, Cengage Learning. 978-0-538-73351-9
+
+\bibitem{Medina} Julio Medina. \text{Método de Diferencias Finitas para ecuaciones elípticas}. \url{https://github.com/Julio-Medina/Finite_Difference_Method}
 
 \bibitem{Varga} Richard S. Varga. \textit{Matrix Iterative Analysis}. Second Edition. Springer. DOI 10.1007/978-3-642-05156-2
 

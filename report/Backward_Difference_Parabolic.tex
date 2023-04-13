@@ -27,7 +27,7 @@
 
 \Large
  \begin{center}
-Método de Diferencias Finitas para ecuaciones parabólicas\\
+Método de Diferencias Atrasadas para ecuaciones parabólicas\\
 
 
 \hspace{10pt}
@@ -86,7 +86,7 @@ para cada $i=1,2,\hdots,m-1$ y $j=1,2,\hdots$. Definiendo $\lambda=\frac{\alpha^
 \end{equation}
 para cada $i=1,2,\hdots,m-1$ y $j=1,2,\hdots$. Usando las condiciones de frontera se sabe que $w_{i,0}=f(x_i)$, para cada  
 $i=1,2,\hdots,m-1$ y $w_{m,j}=w_{0,j}=0$ para $j=1,2,\hdots$, este método de diferencias atrasadas puede representarse matricialmente de la forma
-\begin{equation}
+\begin{equation}\label{eq::linear_system}
 \begin{bmatrix}
 (1+2\lambda) & -\lambda & 0 &\dots&0 \\
 -\lambda     &\ddots    & \ddots& \ddots&\vdots\\
@@ -113,7 +113,14 @@ o equivalentemente $A\mathbf{w}^{(j)}=\mathbf{w}^{(j-1)}$, para cada $i=1,2,\hdo
 De esta forma se tiene un método iterativo para aproximar las soluciones conforme el tiempo avanza. Además se tiene que $\lambda>0$ por lo que la matriz $A$ es positiva definida, es diagonal, como también es una matriz tridiagonal por lo que se puede aplicar el método de factorización de Crout para matrices tridiagonales, una generalización de este método para matrices tridiagonales por bloques puede encontrarse en \cite{Medina}.
 
 \section{Algoritmo de diferencias atrasadas para la ecuación de calor}
-Para resolver el problema definido en \ref{eq::parabolic_partial_diff} y utilizando el método de diferencias atrasadas se puede construir un algoritmo para solucionar el problema con condiciones en la frontera, en el algoritmo \ref{alg::backward_difference} se ha utilizado a la función de la generalización de Crout \cite{Medina} y que se puede encontrar en GitHub. Este algoritmo también se ha implementado en Python y se puede revisar el código en el repositorio
+Con el desarrollo de la sección anterior se tienen las herramientas para escribir un algoritmo que resuelva ecuaciones diferenciales parciales parabólicas de la forma \ref{eq::parabolic_partial_diff}. El esquema a seguir es el siguiente
+\begin{itemize}
+\item Construir el sistema de ecuaciones inicial \ref{eq::linear_system}
+\item Resolver el sistema para encontrar el siguiente paso temporal es decir $\mathbf{w}^{(j)}$ utilizando $\mathbf{w}^{(j-1)}$
+\item Iterar en el tiempo cuantos pasos se requieran.
+\end{itemize}
+\subsection{Algoritmo de diferencias atrasadas para ecuación de calor(parabólica)}
+Para resolver el problema definido en \ref{eq::parabolic_partial_diff} y utilizando el método de diferencias atrasadas se puede construir un algoritmo para solucionar el problema con condiciones en la frontera, en el algoritmo \ref{alg::backward_difference} se ha utilizado a la función de la generalización de Crout \cite{Medina}, que se puede encontrar en GitHub. Este algoritmo también se ha implementado en Python y se puede revisar el código en el repositorio
 \url{https://github.com/Julio-Medina/Finite_Difference_Method_Parabolic/tree/main/code}.
 \begin{algorithm}[H]
 \caption{Finite Difference Linear System}\label{alg::backward_difference}
@@ -141,7 +148,15 @@ Para resolver el problema definido en \ref{eq::parabolic_partial_diff} y utiliza
 \EndFunction
 \end{algorithmic}
 \end{algorithm}
-
+\subsection{Ejemplo}
+Usar el método de diferencias atrasadas utilizando el algoritmo \ref{alg::backward_difference} con $h=0.1$ y $k=0.01$ para aproximar la solución de la ecuación de calor
+\begin{equation}
+\frac{\partial u}{\partial t}(x,t) -\frac{\partial^2 u}{\partial x ^2}(x,t)=0, \,\,\, 0<x<1,\,\,\, t>0,
+\end{equation}
+sujeta a las condiciones de frontera
+\begin{equation*}
+u(0,t)=u(1,t)=0,\,\,\, t>0,\,\,\,u(x,0)=\sin{\pi x},\,\,\, 0\leq x \leq 1
+\end{equation*}
 
 \begin{thebibliography}{99}
 %% La bibliografía se ordena en orden alfabético respecto al apellido del 

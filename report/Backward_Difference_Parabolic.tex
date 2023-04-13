@@ -57,9 +57,90 @@ sujeta a las condiciones
 \begin{equation}
 u(0,t)=u(l,t)=0,\,\,\, t>0, \,\,\,\text{y}\,\,\, u(x,0)=f(x)
 \end{equation}
-El acercamiento para resolver la ecuación \ref{eq::parabolic_partial_diff} es el mismo utilizado en \cite{Medina} y \cite{Burden}. Es decir se define un retículo al seleccionar un $m>0$ y definir el paso $h=l/m$, despues escoger un paso temporal $k$, los puntos del reticulo en este caso son $(x_i, t_j)$, donde $x_i=ih$, para $i=0,1,\hdots,m$ y $t_j=jk$ para $j=1,2,\hdots$. 
+El acercamiento para resolver la ecuación \ref{eq::parabolic_partial_diff} es el mismo utilizado en \cite{Medina} y \cite{Burden}. Es decir se define un retículo al seleccionar un $m>0$ y definir el paso $h=l/m$, despues escoger un paso temporal $k$, los puntos del retículo en este caso son $(x_i, t_j)$, donde $x_i=ih$, para $i=0,1,\hdots,m$ y $t_j=jk$ para $j=1,2,\hdots$. 
 \subsection{Método de diferencias atrasadas}
+Cuando se utiliza el método de diferencias adelantadas para resolver la ecuación diferencial parcial parabólicas su pueden obtener sistemas inestables, ver \cite{Burden}. Para obtener un método incondicionalmente estable se considera un método de diferencias implícitas que resulta en el método de diferencias atrasadas para la razón de la forma
+\begin{equation}\label{eq::implicit_difference}
+\frac{\partial u}{\partial t}(x_i,t_j)=\frac{u(x_i,t_j)-u(x_i,t_{j-1})}{k}+\frac{k}{2}\frac{\partial ^2 u}{\partial t^2}(x_i,\mu_j)
+\end{equation}
+donde $\mu_j$ se encuentra dentro de $(t_{j-1},t_j)$.\\
+También es necesario escribir una ecuación de diferencias utilizando una serie de Taylor para el término que involucra a la segunda derivada con respecto de $x$
+\begin{equation}\label{eq::finite_difference_u_xx}
+\frac{\partial^2 u}{\partial x^2}(x_i,t_j)=\frac{u(x_i+h,t_j)-2u(x_i,t_j)+u(x_i-h,t_j)}{h^2}-\frac{h^2}{12}\frac{\partial^4 u}{\partial x^4}(\xi_i,t_j)
+\end{equation}
+donde $\xi_i\in (x_{i-1},x_{i+1})$.
+Sustituyendo las expresiones \ref{eq::finite_difference_u_xx} y \ref{eq::implicit_difference} en \ref{eq::parabolic_partial_diff} se obtiene 
+\begin{equation}
+\begin{aligned}
+\frac{u(x_i,t_j)-u(x_i,t_{j-1})}{k}-\alpha^2 \frac{u(x_{i+1},t_{j})-2u(x_{i},t_{j})+u(x_{i-1},t_{j})}{h^2}\\
+=-\frac{k}{2}\frac{\partial^2 u}{\partial t^2}(x_i,\mu_j)-\alpha^2\frac{h^2}{12}(\xi_i,t_j)
+\end{aligned}
+\end{equation}
+para algún $\xi \in (x_{i-1},x_{i+1})$. El método de diferencias retrasadas resultantes es 
+\begin{equation}\label{eq::backward_difference_method}
+\frac{w_{ij}-w_{i,j-1}}{k}-\alpha^2\frac{w_{i+1,j}-2w_{ij}+w_{i-1,j}}{h^2}=0
+\end{equation}
+para cada $i=1,2,\hdots,m-1$ y $j=1,2,\hdots$. Definiendo $\lambda=\frac{\alpha^2 k}{h^2}$, el método de diferencias atrasadas se puede reescribir como
+\begin{equation}\label{eq::backward_difference_method_lambda}
+(1+2\lambda)w_{ij}-\lambda w_{i+1,j}-\lambda w_{i-1,j}=w_{i,j-1}
+\end{equation}
+para cada $i=1,2,\hdots,m-1$ y $j=1,2,\hdots$. Usando las condiciones de frontera se sabe que $w_{i,0}=f(x_i)$, para cada  
+$i=1,2,\hdots,m-1$ y $w_{m,j}=w_{0,j}=0$ para $j=1,2,\hdots$, este método de diferencias atrasadas puede representarse matricialmente de la forma
+\begin{equation}
+\begin{bmatrix}
+(1+2\lambda) & -\lambda & 0 &\dots&0 \\
+-\lambda     &\ddots    & \ddots& \ddots&\vdots\\
+0&\ddots&\ddots&\ddots&0\\
+\vdots&\ddots&\ddots&\ddots&-\lambda\\
+0&\dots&0&-\lambda&(1+2\lambda)
+\end{bmatrix}
+\begin{bmatrix}
+w_{1,j}\\
+w_{2,j}\\
+w_{3,j}\\
+\vdots\\
+w_{m-1,j}\\
+\end{bmatrix}=
+\begin{bmatrix}
+w_{1,j-1}\\
+w_{2,j-1}\\
+w_{3,j-1}\\
+\vdots\\
+w_{m-1,j-1}\\
+\end{bmatrix}
+\end{equation}
+o equivalentemente $A\mathbf{w}^{(j)}=\mathbf{w}^{(j-1)}$, para cada $i=1,2,\hdots$.\\
+De esta forma se tiene un método iterativo para aproximar las soluciones conforme el tiempo avanza. Además se tiene que $\lambda>0$ por lo que la matriz $A$ es positiva definida, es diagonal, como también es una matriz tridiagonal por lo que se puede aplicar el método de factorización de Crout para matrices tridiagonales, una generalización de este método para matrices tridiagonales por bloques puede encontrarse en \cite{Medina}.
 
+\section{Algoritmo de diferencias atrasadas para la ecuación de calor}
+Para resolver el problema definido en \ref{eq::parabolic_partial_diff} y utilizando el método de diferencias atrasadas se puede construir un algoritmo para solucionar el problema con condiciones en la frontera, en el algoritmo \ref{alg::backward_difference} se ha utilizado a la función de la generalización de Crout \cite{Medina} y que se puede encontrar en GitHub. Este algoritmo también se ha implementado en Python y se puede revisar el código en el repositorio
+\url{https://github.com/Julio-Medina/Finite_Difference_Method_Parabolic/tree/main/code}.
+\begin{algorithm}[H]
+\caption{Finite Difference Linear System}\label{alg::backward_difference}
+\begin{algorithmic}[H]
+\Function{backward\_difference\_method}{$l,T,\alpha,N,m,f$}
+\State $h \gets l/m$
+\State $k \gets T/N$
+\State $\lambda \gets \alpha^2 k /h^2$
+\State $x\gets \text{numpy.linspace}(0, l, m+1)$
+\State $t \gets \text{numpy.linspace}(0, T, N+1)$
+\State $A \gets$ zeros $(m-1,m-1)$
+\State $w \gets$ zeros $(m-1)$
+\For{$i \gets 0$ to $m-2$}
+\State $A[i,i]\gets (1+2\lambda)$
+\If{$i<m-2$}
+\State $A[i,i+1]\gets-\lambda$
+\State $A[i+1,i]\gets-\lambda$
+\EndIf
+\EndFor
+\For{$j\gets 0$ to $N+1$}
+\State print $t[j],w$
+\State $w \gets$ Crout\_generalization$(A,w,m-1)$
+\EndFor
+\State \textbf{return} $A, w$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
 
 
 \begin{thebibliography}{99}
@@ -71,7 +152,7 @@ El acercamiento para resolver la ecuación \ref{eq::parabolic_partial_diff} es e
 
 \bibitem{Burden} Richard L. Burden, J. Douglas Faires \textit{Numerical Analysis}, (Ninth Edition). Brooks/Cole, Cengage Learning. 978-0-538-73351-9
 
-\bibitem{Medina} Julio Medina. \text{Método de Diferencias Finitas para ecuaciones elípticas}. \url{https://github.com/Julio-Medina/Finite_Difference_Method}
+\bibitem{Medina} Julio Medina. \textit{Método de Diferencias Finitas para ecuaciones elípticas}. \url{https://github.com/Julio-Medina/Finite_Difference_Method}
 
 \bibitem{Varga} Richard S. Varga. \textit{Matrix Iterative Analysis}. Second Edition. Springer. DOI 10.1007/978-3-642-05156-2
 

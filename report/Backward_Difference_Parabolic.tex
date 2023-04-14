@@ -149,7 +149,7 @@ Para resolver el problema definido en \ref{eq::parabolic_partial_diff} y utiliza
 \end{algorithmic}
 \end{algorithm}
 \subsection{Ejemplo}
-Usar el método de diferencias atrasadas utilizando el algoritmo \ref{alg::backward_difference} con $h=0.1$ y $k=0.01$ para aproximar la solución de la ecuación de calor
+Usar el método de diferencias atrasadas utilizando el algoritmo \ref{alg::backward_difference} con $h=0.1$ y $k=0.01$ para aproximar la solución de la ecuación de calor, usar $h=0.1$ y $k=001$ en el algoritmo
 \begin{equation}
 \frac{\partial u}{\partial t}(x,t) -\frac{\partial^2 u}{\partial x ^2}(x,t)=0, \,\,\, 0<x<1,\,\,\, t>0,
 \end{equation}
@@ -157,6 +157,28 @@ sujeta a las condiciones de frontera
 \begin{equation*}
 u(0,t)=u(1,t)=0,\,\,\, t>0,\,\,\,u(x,0)=\sin{\pi x},\,\,\, 0\leq x \leq 1
 \end{equation*}
+y comparar las aproximaciones con el la solución analítica
+\begin{equation}
+u(x,t)=e^{-\pi^2 t}\sin{(\pi x)}
+\end{equation}
+Para  resolver este problema se utilizan las funciones creadas en Python, la tabla donde se tabulan los errores se presenta a continuación\\
+\begin{tabular}{lrrrr}
+\toprule
+$i$ &  $x_i$ &    $w_{i,50}$ &    $u(x_i,0.5)$ &  $|u(x_i,0.5)-w_{i,50}|$ \\
+\midrule
+0  &  0.0 &  0.000000 &  0.000000e+00 &         0.000000e+00 \\
+1  &  0.1 &  0.002898 &  2.222414e-03 &         6.756025e-04 \\
+2  &  0.2 &  0.005512 &  4.227283e-03 &         1.285072e-03 \\
+3  &  0.3 &  0.007587 &  5.818356e-03 &         1.768750e-03 \\
+4  &  0.4 &  0.008919 &  6.839888e-03 &         2.079291e-03 \\
+5  &  0.5 &  0.009378 &  7.191883e-03 &         2.186296e-03 \\
+6  &  0.6 &  0.008919 &  6.839888e-03 &         2.079291e-03 \\
+7  &  0.7 &  0.007587 &  5.818356e-03 &         1.768750e-03 \\
+8  &  0.8 &  0.005512 &  4.227283e-03 &         1.285072e-03 \\
+9  &  0.9 &  0.002898 &  2.222414e-03 &         6.756025e-04 \\
+10 &  1.0 &  0.000000 &  8.807517e-19 &         8.807517e-19 \\
+\bottomrule
+\end{tabular}
 
 \begin{thebibliography}{99}
 %% La bibliografía se ordena en orden alfabético respecto al apellido del 

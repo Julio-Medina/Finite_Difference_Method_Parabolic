@@ -27,7 +27,7 @@
 
 \Large
  \begin{center}
-Método de Diferencias Atrasadas para ecuaciones parabólicas\\
+\textbf{Método de Diferencias Atrasadas para ecuaciones parabólicas}\\
 
 
 \hspace{10pt}
@@ -76,7 +76,7 @@ Sustituyendo las expresiones \ref{eq::finite_difference_u_xx} y \ref{eq::implici
 =-\frac{k}{2}\frac{\partial^2 u}{\partial t^2}(x_i,\mu_j)-\alpha^2\frac{h^2}{12}(\xi_i,t_j)
 \end{aligned}
 \end{equation}
-para algún $\xi \in (x_{i-1},x_{i+1})$. El método de diferencias retrasadas resultantes es 
+para algún $\xi \in (x_{i-1},x_{i+1})$. El método de diferencias retrasadas resultante es 
 \begin{equation}\label{eq::backward_difference_method}
 \frac{w_{ij}-w_{i,j-1}}{k}-\alpha^2\frac{w_{i+1,j}-2w_{ij}+w_{i-1,j}}{h^2}=0
 \end{equation}
@@ -120,7 +120,7 @@ Con el desarrollo de la sección anterior se tienen las herramientas para escrib
 \item Iterar en el tiempo cuantos pasos se requieran.
 \end{itemize}
 \subsection{Algoritmo de diferencias atrasadas para ecuación de calor(parabólica)}
-Para resolver el problema definido en \ref{eq::parabolic_partial_diff} y utilizando el método de diferencias atrasadas se puede construir un algoritmo para solucionar el problema con condiciones en la frontera, en el algoritmo \ref{alg::backward_difference} se ha utilizado a la función de la generalización de Crout \cite{Medina}, que se puede encontrar en GitHub. Este algoritmo también se ha implementado en Python y se puede revisar el código en el repositorio
+Para resolver el problema definido en \ref{eq::parabolic_partial_diff} se puede utilizar el método de diferencias atrasadas para construir un algoritmo que aproxime la solución al problema con condiciones en la frontera, en el algoritmo \ref{alg::backward_difference} se ha utilizado a la función de la generalización de Crout implementada en \cite{Medina}, que se puede encontrar en GitHub. La implementación de este algoritmo puede hallarse en el siguiente repositorio 
 \url{https://github.com/Julio-Medina/Finite_Difference_Method_Parabolic/tree/main/code}.
 \begin{algorithm}[H]
 \caption{Finite Difference Linear System}\label{alg::backward_difference}
@@ -149,7 +149,7 @@ Para resolver el problema definido en \ref{eq::parabolic_partial_diff} y utiliza
 \end{algorithmic}
 \end{algorithm}
 \subsection{Ejemplo}
-Usar el método de diferencias atrasadas utilizando el algoritmo \ref{alg::backward_difference} con $h=0.1$ y $k=0.01$ para aproximar la solución de la ecuación de calor, usar $h=0.1$ y $k=001$ en el algoritmo
+Usar el método de diferencias atrasadas utilizando el algoritmo \ref{alg::backward_difference} con $h=0.1$ y $k=0.01$ para aproximar la solución de la ecuación de calor
 \begin{equation}
 \frac{\partial u}{\partial t}(x,t) -\frac{\partial^2 u}{\partial x ^2}(x,t)=0, \,\,\, 0<x<1,\,\,\, t>0,
 \end{equation}
@@ -161,7 +161,7 @@ y comparar las aproximaciones con el la solución analítica
 \begin{equation}
 u(x,t)=e^{-\pi^2 t}\sin{(\pi x)}
 \end{equation}
-Para  resolver este problema se utilizan las funciones creadas en Python, la tabla donde se tabulan los errores se presenta a continuación\\
+Para  resolver este problema se utilizan el algoritmo \ref{alg::backward_difference}, la tabla donde se tabulan los errores se presenta a continuación\\
 \begin{tabular}{lrrrr}
 \toprule
 $i$ &  $x_i$ &    $w_{i,50}$ &    $u(x_i,0.5)$ &  $|u(x_i,0.5)-w_{i,50}|$ \\
@@ -179,6 +179,9 @@ $i$ &  $x_i$ &    $w_{i,50}$ &    $u(x_i,0.5)$ &  $|u(x_i,0.5)-w_{i,50}|$ \\
 10 &  1.0 &  0.000000 &  8.807517e-19 &         8.807517e-19 \\
 \bottomrule
 \end{tabular}
+\section{Conclusiones}
+Cuando se aplica el método de diferencias finitas a ecuaciones parciales parabólicas se tiene la peculiaridad que debido al comportamiento inestable de aplicar diferencias adelantadas se busca otra opción al utilizar las aproximaciones para las segundas derivadas que vienen dadas por las diferencias atrasadas. Debido a que el sistema lineal asociado \ref{eq::linear_system} se trata de una matriz tridiagonal además se tiene que se trata de una matriz positiva definida($\lambda>0$) por lo que es conveniente utilizar el método de factorización de Crout para resolver el sistema lineal. El error es del orden $O(k+h^2)$.
+
 
 \begin{thebibliography}{99}
 %% La bibliografía se ordena en orden alfabético respecto al apellido del 

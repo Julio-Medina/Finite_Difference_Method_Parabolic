@@ -1,0 +1,229 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bbold}
+\usepackage{graphicx}
+\usepackage{blindtext}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{booktabs}
+
+\setcounter{MaxMatrixCols}{20}
+
+\begin{document}
+\pagenumbering{arabic}
+
+\Large
+\begin{center}
+\textbf{Backward Difference Method for Parabolic Equations}\\
+
+\hspace{10pt}
+
+\large
+BSc. Julio A. Medina\\
+\hspace{10pt}
+\small
+Universidad de San Carlos de Guatemala\\
+School of Physical and Mathematical Sciences\\
+Master's Program in Physics\\
+\href{mailto:julioantonio.medina@gmail.com}{julioantonio.medina@gmail.com}\\
+\end{center}
+
+\hspace{10pt}
+
+\normalsize
+\section{Parabolic Partial Differential Equations}
+
+The parabolic partial differential equation, or heat equation, also known as the diffusion equation, is
+\begin{equation}\label{eq::parabolic_partial_diff}
+\frac{\partial u}{\partial t}(x,t)=\alpha^2\frac{\partial^2u}{\partial x^2}(x,t),\qquad 0<x<l,\qquad t>0.
+\end{equation}
+It is subject to the conditions
+\begin{equation}
+u(0,t)=u(l,t)=0,\qquad t>0,\qquad \text{and}\qquad u(x,0)=f(x).
+\end{equation}
+
+The approach used to solve Eq.~\ref{eq::parabolic_partial_diff} is the same as the one presented in \cite{Medina} and \cite{Burden}. A grid is defined by selecting an integer $m>0$ and setting the spatial step size to $h=l/m$. A temporal step size $k$ is then selected. The grid points are $(x_i,t_j)$, where $x_i=ih$ for $i=0,1,\ldots,m$ and $t_j=jk$ for $j=1,2,\ldots$.
+
+\subsection{Backward Difference Method}
+
+When the forward-difference method is used to solve parabolic partial differential equations, unstable systems may be obtained; see \cite{Burden}. To obtain an unconditionally stable method, an implicit finite-difference approximation is considered. The backward approximation for the time derivative is
+\begin{equation}\label{eq::implicit_difference}
+\frac{\partial u}{\partial t}(x_i,t_j)=\frac{u(x_i,t_j)-u(x_i,t_{j-1})}{k}+\frac{k}{2}\frac{\partial^2u}{\partial t^2}(x_i,\mu_j),
+\end{equation}
+where $\mu_j\in(t_{j-1},t_j)$.
+
+A finite-difference expression for the second derivative with respect to $x$ is also required. A Taylor expansion gives
+\begin{equation}\label{eq::finite_difference_u_xx}
+\frac{\partial^2u}{\partial x^2}(x_i,t_j)=\frac{u(x_i+h,t_j)-2u(x_i,t_j)+u(x_i-h,t_j)}{h^2}-\frac{h^2}{12}\frac{\partial^4u}{\partial x^4}(\xi_i,t_j),
+\end{equation}
+where $\xi_i\in(x_{i-1},x_{i+1})$.
+
+Substituting Eqs.~\ref{eq::finite_difference_u_xx} and \ref{eq::implicit_difference} into Eq.~\ref{eq::parabolic_partial_diff} gives
+\begin{equation}
+\begin{aligned}
+\frac{u(x_i,t_j)-u(x_i,t_{j-1})}{k}-\alpha^2\frac{u(x_{i+1},t_j)-2u(x_i,t_j)+u(x_{i-1},t_j)}{h^2} \\
+=-\frac{k}{2}\frac{\partial^2u}{\partial t^2}(x_i,\mu_j)-\alpha^2\frac{h^2}{12}\frac{\partial^4u}{\partial x^4}(\xi_i,t_j).
+\end{aligned}
+\end{equation}
+
+The resulting backward-difference method is
+\begin{equation}\label{eq::backward_difference_method}
+\frac{w_{i,j}-w_{i,j-1}}{k}-\alpha^2\frac{w_{i+1,j}-2w_{i,j}+w_{i-1,j}}{h^2}=0,
+\end{equation}
+for each $i=1,2,\ldots,m-1$ and $j=1,2,\ldots$. Defining
+\begin{equation}
+\lambda=\frac{\alpha^2k}{h^2},
+\end{equation}
+Eq.~\ref{eq::backward_difference_method} can be rewritten as
+\begin{equation}\label{eq::backward_difference_method_lambda}
+(1+2\lambda)w_{i,j}-\lambda w_{i+1,j}-\lambda w_{i-1,j}=w_{i,j-1},
+\end{equation}
+for each $i=1,2,\ldots,m-1$ and $j=1,2,\ldots$.
+
+From the initial and boundary conditions,
+\begin{equation}
+w_{i,0}=f(x_i),\qquad i=1,2,\ldots,m-1,
+\end{equation}
+and
+\begin{equation}
+w_{0,j}=w_{m,j}=0,\qquad j=1,2,\ldots.
+\end{equation}
+Therefore, the backward-difference method can be represented in matrix form as
+\begin{equation}\label{eq::linear_system}
+\begin{bmatrix}
+1+2\lambda & -\lambda & 0 & \cdots & 0 \\
+-\lambda & \ddots & \ddots & \ddots & \vdots \\
+0 & \ddots & \ddots & \ddots & 0 \\
+\vdots & \ddots & \ddots & \ddots & -\lambda \\
+0 & \cdots & 0 & -\lambda & 1+2\lambda
+\end{bmatrix}
+\begin{bmatrix}
+w_{1,j} \\
+w_{2,j} \\
+w_{3,j} \\
+\vdots \\
+w_{m-1,j}
+\end{bmatrix}
+=
+\begin{bmatrix}
+w_{1,j-1} \\
+w_{2,j-1} \\
+w_{3,j-1} \\
+\vdots \\
+w_{m-1,j-1}
+\end{bmatrix}.
+\end{equation}
+Equivalently,
+\begin{equation}
+A\mathbf{w}^{(j)}=\mathbf{w}^{(j-1)},
+\end{equation}
+for each time level $j=1,2,\ldots$.
+
+This formulation defines an iterative method for approximating the solution as time advances. Because $\lambda>0$, the matrix $A$ is symmetric, positive definite, strictly diagonally dominant, and tridiagonal. Therefore, Crout factorization is suitable for solving the linear system. A generalization of this method for block-tridiagonal matrices can be found in \cite{Medina}.
+
+\section{Backward-Difference Algorithm for the Heat Equation}
+
+The development in the previous section provides the tools required to construct an algorithm for solving parabolic partial differential equations of the form given in Eq.~\ref{eq::parabolic_partial_diff}. The procedure is as follows:
+\begin{itemize}
+\item Construct the initial linear system in Eq.~\ref{eq::linear_system}.
+\item Solve the system to obtain the next temporal state $\mathbf{w}^{(j)}$ from $\mathbf{w}^{(j-1)}$.
+\item Repeat the process for the required number of time steps.
+\end{itemize}
+
+\subsection{Algorithm for the Parabolic Heat Equation}
+
+The backward-difference method can be used to construct an algorithm that approximates the solution of the boundary-value problem defined in Eq.~\ref{eq::parabolic_partial_diff}. Algorithm~\ref{alg::backward_difference} uses the generalized Crout factorization function implemented in \cite{Medina}. The Python implementation is available in the following repository:
+\url{https://github.com/Julio-Medina/Finite_Difference_Method_Parabolic/tree/main/code}.
+
+\begin{algorithm}[H]
+\caption{Backward-Difference Method for the Heat Equation}\label{alg::backward_difference}
+\begin{algorithmic}[H]
+\Function{backward\_difference\_method}{$l,T,\alpha,N,m,f$}
+\State $h\gets l/m$
+\State $k\gets T/N$
+\State $\lambda\gets\alpha^2k/h^2$
+\State $x\gets\text{numpy.linspace}(0,l,m+1)$
+\State $t\gets\text{numpy.linspace}(0,T,N+1)$
+\State $A\gets\text{zeros}(m-1,m-1)$
+\State $w\gets f(x[1:-1])$
+\For{$i\gets0$ to $m-2$}
+\State $A[i,i]\gets1+2\lambda$
+\If{$i<m-2$}
+\State $A[i,i+1]\gets-\lambda$
+\State $A[i+1,i]\gets-\lambda$
+\EndIf
+\EndFor
+\For{$j\gets1$ to $N$}
+\State $w\gets\Call{Crout\_generalization}{A,w,m-1}$
+\EndFor
+\State \textbf{return} $A,w,x$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Example}
+
+Use the backward-difference method with $h=0.1$ and $k=0.01$ to approximate the solution of the heat equation
+\begin{equation}
+\frac{\partial u}{\partial t}(x,t)-\frac{\partial^2u}{\partial x^2}(x,t)=0,\qquad 0<x<1,\qquad t>0,
+\end{equation}
+subject to the boundary and initial conditions
+\begin{equation*}
+u(0,t)=u(1,t)=0,\qquad t>0,\qquad u(x,0)=\sin(\pi x),\qquad 0\leq x\leq1,
+\end{equation*}
+and compare the approximations with the analytical solution
+\begin{equation}
+u(x,t)=e^{-\pi^2t}\sin(\pi x).
+\end{equation}
+
+The pointwise errors are shown in the following table:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+$i$ & $x_i$ & $w_{i,50}$ & $u(x_i,0.5)$ & $\lvert u(x_i,0.5)-w_{i,50}\rvert$ \\
+\midrule
+0  & 0.0 & 0.000000 & 0.000000e+00 & 0.000000e+00 \\
+1  & 0.1 & 0.002898 & 2.222414e-03 & 6.756025e-04 \\
+2  & 0.2 & 0.005512 & 4.227283e-03 & 1.285072e-03 \\
+3  & 0.3 & 0.007587 & 5.818356e-03 & 1.768750e-03 \\
+4  & 0.4 & 0.008919 & 6.839888e-03 & 2.079291e-03 \\
+5  & 0.5 & 0.009378 & 7.191883e-03 & 2.186296e-03 \\
+6  & 0.6 & 0.008919 & 6.839888e-03 & 2.079291e-03 \\
+7  & 0.7 & 0.007587 & 5.818356e-03 & 1.768750e-03 \\
+8  & 0.8 & 0.005512 & 4.227283e-03 & 1.285072e-03 \\
+9  & 0.9 & 0.002898 & 2.222414e-03 & 6.756025e-04 \\
+10 & 1.0 & 0.000000 & 8.807517e-19 & 8.807517e-19 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Conclusions}
+
+When the finite-difference method is applied to parabolic partial differential equations, an explicit forward-difference discretization may exhibit unstable behavior unless a stability restriction is satisfied. The implicit backward-difference approximation provides an unconditionally stable alternative. The associated linear system in Eq.~\ref{eq::linear_system} has a symmetric, positive-definite, strictly diagonally dominant, tridiagonal coefficient matrix for $\lambda>0$. Consequently, Crout factorization is an appropriate method for solving the system. The truncation error is of order
+\begin{equation}
+O(k+h^2).
+\end{equation}
+
+\begin{thebibliography}{99}
+
+\bibitem{Burden}
+Richard L. Burden and J. Douglas Faires, \textit{Numerical Analysis}, 9th edition, Brooks/Cole, Cengage Learning. ISBN 978-0-538-73351-9.
+
+\bibitem{Medina}
+Julio Medina, \textit{Finite Difference Method for Elliptic Equations}. \url{https://github.com/Julio-Medina/Finite_Difference_Method}
+
+\bibitem{Varga}
+Richard S. Varga, \textit{Matrix Iterative Analysis}, 2nd edition, Springer. DOI: 10.1007/978-3-642-05156-2.
+
+\end{thebibliography}
+\end{document}

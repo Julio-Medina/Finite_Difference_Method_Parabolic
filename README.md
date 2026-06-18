@@ -2,13 +2,6 @@
 
 A Python implementation of an implicit finite-difference method for the one-dimensional heat equation. The project discretizes the spatial domain with centered differences, advances the solution with a backward difference in time, and solves the resulting linear system through a generalized Crout factorization routine.
 
-## Author
-
-**BSc. Julio Medina**  
-Universidad de San Carlos de Guatemala  
-School of Physical and Mathematical Sciences  
-Master's Program in Physics
-
 ## Mathematical problem
 
 The code considers the parabolic partial differential equation
@@ -51,7 +44,7 @@ $$A\mathbf{w}^{(j)}=\mathbf{w}^{(j-1)},$$
 
 where the coefficient matrix can be written compactly as
 
-$$A=\operatorname{tridiag}(-\lambda,\,1+2\lambda,\,-\lambda).$$
+$$A=\mathrm{tridiag}\!\left(-\lambda,\,1+2\lambda,\,-\lambda\right).$$
 
 For $\lambda>0$, $A$ is symmetric, positive definite, and strictly diagonally dominant. The backward-difference method is unconditionally stable, and its truncation error is
 
@@ -144,6 +137,13 @@ The CSV file contains the spatial coordinate, numerical approximation, analytica
 ## Current implementation detail
 
 The time array contains $N+1$ values, and the current loop performs a linear solve for every value in that array. The function stores the state immediately before the last solve in `aux`; consequently, the example uses the returned `w_aux` value when constructing the error table at $t=T$.
+
+## Author
+
+**BSc. Julio Medina**  
+Universidad de San Carlos de Guatemala  
+School of Physical and Mathematical Sciences  
+Master's Program in Physics
 
 ## References
 
